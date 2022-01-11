@@ -5,7 +5,7 @@ let clusterRepeats = false; //cursed atm
 let numResultsPerRow = 8;
 let addCommas = false;
 
-document.querySelector("#csv").hidden = true;
+document.querySelector("#csv").style.display = "none";
 
 const disableSubmit = event => {
     addNumber();
@@ -57,7 +57,7 @@ const refreshList = () => {
     list=[];
     refreshListButton();
     updateListDisplay();
-    document.querySelector("#csv").hidden = true;
+    document.querySelector("#csv").style.display = "none";
     displayOutput();
 }
 
@@ -110,7 +110,7 @@ const displayOutput = () => {
         }
     }
     output.innerHTML = outputStr;
-    document.querySelector("#csv").hidden = false;
+    document.querySelector("#csv").style.display = "none";
 }
 
 const download = () => {
