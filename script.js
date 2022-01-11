@@ -110,7 +110,7 @@ const displayOutput = () => {
         }
     }
     output.innerHTML = outputStr;
-    document.querySelector("#csv").style.display = "none";
+    document.querySelector("#csv").style.display = "block";
 }
 
 const download = () => {
