@@ -1,8 +1,11 @@
 let list = [];
+let sortedResult = [];
 let timeoutBuffer;
 let clusterRepeats = false; //cursed atm
 let numResultsPerRow = 8;
 let addCommas = false;
+
+document.querySelector("#csv").hidden = true;
 
 const disableSubmit = event => {
     addNumber();
@@ -54,6 +57,7 @@ const refreshList = () => {
     list=[];
     refreshListButton();
     updateListDisplay();
+    document.querySelector("#csv").hidden = true;
     displayOutput();
 }
 
@@ -97,6 +101,7 @@ const displayOutput = () => {
     const copy = list;
     let outputStr = "";
     copy.sort((a,b)=>a-b);
+    sortedResult = copy;
     for(let i=0; i<copy.length; i++){
         outputStr += (copy[i] + ((addCommas && i != copy.length-1) ? ", " : " "));
         if((i+1)%numResultsPerRow == 0){
@@ -105,4 +110,16 @@ const displayOutput = () => {
         }
     }
     output.innerHTML = outputStr;
+    document.querySelector("#csv").hidden = false;
+}
+
+const download = () => {
+    let csvContent = "data:text/csv;charset=utf-8," + "Data\n" + sortedResult.join("\n");
+    let encodedURI = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href",encodedURI);
+    link.setAttribute("download","data.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
